@@ -34,7 +34,7 @@ A configuration script is provided to create a [virtualenv](https://virtualenv.p
 
 - Change `REPO_DIR`, `ROOT_DIR`, `DATA_ROOTDIR`, `THUMBNAIL_DATA_ROOTDIR` in `setup/config.sh`
 - The default `requirements.txt` assumes CUDA version of 9.0. If your CUDA version (check using `nvcc -V` or `cat /usr/local/cuda/version.txt`) is 9.1, replace `mxnet-cu90` with `mxnet-cu91` in `requirements.txt`. If your machine does not have a GPU, replace `mxnet-cu90` with `mxnet`. Refer to [official mxnet page](https://mxnet.incubator.apache.org/install/index.html?platform=Linux&language=Python&processor=CPU) for available pips.
-- `source setup/config.sh`. Make sure we are now working under the mousebrainatlas python virtual environment.
+- `source setup/config.sh`. Make sure we are now working under the `mousebrainatlas_virtualenv` virtual environment.
 - `cd demo`.
 
 
