@@ -66,6 +66,7 @@ Make sure the folder content looks like:
 └── CSHL_data_processed
 │   └── DEMO998
 │       └── DEMO998_sorted_filenames.txt
+│       └── DEMO998_prep2_sectionLimits
 └── operation_configs
     ├── crop_orig_template.ini
     ├── from_aligned_to_none.ini
@@ -122,7 +123,7 @@ Make sure the folder content looks like:
 │           └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_thumbnail_NtbNormalized.tif
 ```
 
-- Create `CSHL_data_processed/DEMO998/DEMO998_sorted_filenames.txt`.
+- Create `CSHL_data_processed/DEMO998/DEMO998_sorted_filenames.txt`. If this file is already downloaded, skip.
 
 - **Align images in this stack**. Copy operation config template `cp operation_configs/from_none_to_aligned_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_none_to_aligned.ini`. Modify `from_none_to_aligned.ini`. In particular make sure `elastix_parameter_fp` is valid. Modify `input_spec.ini` as (None,NtbNormalized,thumbnail). `python align_compose.py input_spec.ini --op from_none_to_aligned`
 
@@ -210,7 +211,8 @@ Make sure the folder content looks like:
 │   └── DEMO998
 │       ├── DEMO998_original_image_crop.csv
 ```
-- Copy operation config template `cp operation_configs/crop_orig_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/crop_orig.ini`. Modify `crop_orig.ini`.  Modify `input_spec.ini` as (alignedPadded,mask,thumbnail). Run `python warp_crop.py --input_spec input_spec.ini --op_id from_padded_to_none`.
+- Copy operation config template. `cp $DATA_ROOTDIR/operation_configs/crop_orig_template.ini $DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_operation_configs/crop_orig.ini`. Modify `crop_orig.ini`. 
+- Modify `input_spec.ini` as (alignedPadded,mask,thumbnail). Run `python warp_crop.py --input_spec input_spec.ini --op_id from_padded_to_none`.
 
 ```bash
 ├── CSHL_data_processed
@@ -253,7 +255,7 @@ Make sure the folder content looks like:
 │       │       └── DEMO998_MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_raw_stdMap.bp
 ```
 
-- **Whole-slice crop**.  Copy operation config template `cp operation_configs/from_padded_to_wholeslice_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_wholeslice.ini`. Modify `from_padded_to_wholeslice.ini`. In this file specify the cropbox for the domain `alignedWithMargin` based on `alignedPadded` images. Modify `input_spec.ini` as (None,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec input_spec.ini --op_id from_none_to_wholeslice`
+- **Whole-slice crop**.  Copy operation config template `cp $DATA_ROOTDIR/operation_configs/from_padded_to_wholeslice_template.ini $DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_wholeslice.ini`. Modify `from_padded_to_wholeslice.ini`. In this file specify the cropbox for the domain `alignedWithMargin` based on `alignedPadded` images. Modify `input_spec.ini` as (None,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec input_spec.ini --op_id from_none_to_wholeslice`
 
 ```bash
 ├── CSHL_data_processed
@@ -308,7 +310,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep2_raw_NtbNormalizedAdaptiveInvertedGammaJpeg.jpg
 ```
  
-- Create `DEMO998_prep2_sectionLimit.ini`.
+- Create `DEMO998_prep2_sectionLimit.ini` if not already downloaded.
 
 ```bash
 [DEFAULT]
@@ -326,9 +328,9 @@ right_section_limit = 235
 │           └── DEMO998_wholebrainWithMargin_10.0um_intensityVolume_origin_wrt_wholebrain.txt
 ```
 
-- Run `DATA_ROOTDIR=/home/yuncong/brainstem/home/yuncong/demo_data ROOT_DIR=/home/yuncong/brainstem/home/yuncong/demo_data THUMBNAIL_DATA_ROOTDIR=/home/yuncong/brainstem/home/yuncong/demo_data python src/gui/brain_labeling_gui_v28.py DEMO998 --img_version NtbNormalizedAdaptiveInvertedGammaJpeg`. Note: must click on the high resolution panel.
+- **Manual rough global registration**. Run `DATA_ROOTDIR=/home/yuncong/brainstem/home/yuncong/demo_data ROOT_DIR=/home/yuncong/brainstem/home/yuncong/demo_data THUMBNAIL_DATA_ROOTDIR=/home/yuncong/brainstem/home/yuncong/demo_data python src/gui/brain_labeling_gui_v28.py DEMO998 --img_version NtbNormalizedAdaptiveInvertedGammaJpeg`. Note down x and y coordinates of the center of 12N and of 3N. Also note down the z-coordinate of the midline. Coordinates show up when clicking  on the high resolution panel while holding the space bar.
 
-- Create `demo_data/CSHL_simple_global_registration/DEMO998_manual_anchor_points.ini`.
+- Create `$DATA_ROOTDIR/CSHL_simple_global_registration/DEMO998_manual_anchor_points.ini` with the above information.
 
 ```bash
 [DEFAULT]
@@ -339,7 +341,7 @@ y_3N=167
 z_midline=6
 ```
 
-- Run `python download_atlas.py`.
+- **Download atlas**. Run `python download_atlas.py`.
 
 ```bash
 ├── CSHL_volumes
@@ -360,7 +362,7 @@ z_midline=6
 │   │           └── atlasV7_10.0um_scoreVolume_4N_R_surround_200um_origin_wrt_canonicalAtlasSpace.txt
 ```
 
-- `python compute_simple_global_registration.py DEMO998 ~/demo_data/CSHL_simple_global_registration/DEMO998_manual_anchor_points.ini`.
+- **Compute rough global registration matrix**. Run `python compute_simple_global_registration.py DEMO998 $DATA_ROOTDIR/CSHL_simple_global_registration/DEMO998_manual_anchor_points.ini`.
 
 ```bash
 ├── CSHL_simple_global_registration
