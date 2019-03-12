@@ -37,9 +37,13 @@ def download_to_demo(fp):
 
 print("Download raw JPEG2000 images")
 for img_name in [
-'MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242',
+'MD662&661-F68-2017.06.06-07.39.27_MD661_2_0203',
+'MD662&661-F73-2017.06.06-09.53.20_MD661_1_0217',
+'MD662&661-F79-2017.06.06-11.52.28_MD661_1_0235',
 'MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250',
-'MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257'
+'MD662&661-F89-2017.06.06-16.49.49_MD661_1_0265',
+'MD662&661-F94-2017.06.06-19.01.05_MD661_1_0280',
+'MD662&661-F99-2017.06.06-21.14.03_MD661_1_0295',
 ]:
 
     download_to_demo(os.path.join('jp2_files', 'DEMO998', img_name + '_lossless.jp2'))
@@ -84,3 +88,5 @@ download_to_demo(os.path.join('brains_info', 'DEMO998.ini'))
 
 download_to_demo(os.path.join('CSHL_data_processed', 'DEMO998', 'DEMO998_sorted_filenames.txt'))
 download_to_demo(os.path.join('CSHL_data_processed', 'DEMO998', 'DEMO998_prep2_sectionLimits.ini'))
+
+download_to_demo('elastix_parameters', 'Parameters_Rigid_MutualInfo_noNumberOfSpatialSamples_4000Iters.txt')
