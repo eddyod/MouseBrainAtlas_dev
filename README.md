@@ -203,7 +203,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep1_thumbnail_mask.png
 ```
 
-- Modify `input_spec.ini` as (None,NtbNormalized,thumbnail). Run `generate_original_image_crop_csv.py input_spec.ini`. 
+- Modify `input_spec.ini` as (None,NtbNormalized,thumbnail). Run `python generate_original_image_crop_csv.py input_spec.ini`. 
 
 ```bash
 ├── CSHL_data_processed
