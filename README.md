@@ -42,8 +42,7 @@ A configuration script is provided to create a [virtualenv](https://virtualenv.p
 
 Note that the `input_spec.ini` files for most steps are different and must be manually created according to the actual input. In the following instructions, "create `input_spec.ini` as (prep_id, version, resolution)" means using the same set of image names as `image_name_list` but set the `prep_id`, `version` and `resolution` accordingly.
 
-- Run `download_demo_data_preprocessing.py` to download necessary data. 
-- Also download `CSHL_data_processed/DEMO998/DEMO998_sorted_filenames.txt`. 
+- Run `python download_demo_data.py` to download necessary data. 
 ```bash
 MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242 225
 MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250 230
@@ -125,7 +124,7 @@ Make sure the folder content looks like:
 
 - Create `CSHL_data_processed/DEMO998/DEMO998_sorted_filenames.txt`.
 
-- **Align images in this stack**. Copy operation config template `cp operation_configs/from_none_to_aligned_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_none_to_aligned.ini`. Modify `from_none_to_aligned.ini`. Modify `input_spec.ini` as (None,NtbNormalized,thumbnail). `python align_compose.py input_spec.ini --op from_none_to_aligned`
+- **Align images in this stack**. Copy operation config template `cp operation_configs/from_none_to_aligned_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_none_to_aligned.ini`. Modify `from_none_to_aligned.ini`. In particular make sure `elastix_parameter_fp` is valid. Modify `input_spec.ini` as (None,NtbNormalized,thumbnail). `python align_compose.py input_spec.ini --op from_none_to_aligned`
 
 ```bash
 ├── CSHL_data_processed
