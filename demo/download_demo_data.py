@@ -90,3 +90,6 @@ download_to_demo(os.path.join('CSHL_data_processed', 'DEMO998', 'DEMO998_sorted_
 download_to_demo(os.path.join('CSHL_data_processed', 'DEMO998', 'DEMO998_prep2_sectionLimits.ini'))
 
 download_to_demo('elastix_parameters', 'Parameters_Rigid_MutualInfo_noNumberOfSpatialSamples_4000Iters.txt')
+
+download_to_demo(os.path.join('CSHL_simple_global_registration', 'DEMO998_registered_atlas_structures_wrt_wholebrainXYcropped_xysecTwoCorners.json'))
+download_to_demo(os.path.join('CSHL_simple_global_registration', 'DEMO998_T_atlas_wrt_canonicalAtlasSpace_subject_wrt_wholebrain_atlasResol.txt'))
