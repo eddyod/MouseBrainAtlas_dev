@@ -269,7 +269,7 @@ left_section_limit = 225
 right_section_limit = 235
 ```
 
-- Create the intensity volume by running `./construct_intensity_volume.py DEMO998 --tb_version NtbNormalizedAdaptiveInvertedGamma --tb_resol thumbnail`
+- **Create intensity volume**. Run `./construct_intensity_volume.py DEMO998 --tb_version NtbNormalizedAdaptiveInvertedGamma --tb_resol thumbnail`
 
 ```bash
 ├── CSHL_volumes
@@ -300,7 +300,7 @@ right_section_limit = 235
 │   │           └── atlasV7_10.0um_scoreVolume_4N_R_surround_200um_origin_wrt_canonicalAtlasSpace.txt
 ```
 
-- Use the provided rough global transform, or obtain it from scratch following the instructions on [this page](doc/rough_global_registration.md).
+- Use the provided **rough global transform**, or obtain it from scratch following the instructions on [this page](doc/rough_global_registration.md).
 
 - **Download pre-trained classifiers**. Run `python download_pretrained_classifiers.py -s "[\"12N\", \"3N\", \"4N\"]"`.
 
