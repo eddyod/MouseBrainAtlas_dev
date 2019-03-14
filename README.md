@@ -1,3 +1,8 @@
+[An active texture-based digital atlas enables automated mapping of structures and markers across brains.](https://www.nature.com/articles/s41592-019-0328-8)
+Yuncong Chen, Lauren E. McElvain, Alexander S. Tolpygo, Daniel Ferrante, Beth Friedman, Partha P. Mitra, Harvey J. Karten, Yoav Freund & David Kleinfeld. 
+_Nature Methods_ (2019/3/11)
+
+
 This toolkit is written in Python 2.7.2 and has been tested on a machine with Intel Xeon W5580 3.20GHz 16-core CPU, 128GB RAM and a Nvidia Titan X GPU, running Linux Ubuntu 16.04. 
 
 ## Installation
