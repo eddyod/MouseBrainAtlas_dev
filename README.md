@@ -91,7 +91,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_raw.tif
 ```
 
-- **Extract Neurotrace-blue channel**. Modify `input_spec.ini` as (None,None,raw). `python extract_channel.py input_spec.ini 2 Ntb`
+- **Extract Neurotrace-blue channel**. Modify `input_spec.ini` as (None,None,raw). `python extract_channel.py example_specs/DEMO998_input_spec.ini 2 Ntb`
 
 ```bash
 ├── CSHL_data_processed
@@ -101,7 +101,7 @@ Make sure the folder content looks like:
 │           ├── MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250_raw_Ntb.tif
 │           └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_raw_Ntb.tif
 ```
-- **Rescale to thumbnail**. Modify `input_spec.ini` as (None,Ntb,raw). `python rescale.py input_spec.ini thumbnail -f 0.03125`
+- **Rescale to thumbnail**. Modify `input_spec.ini` as (None,Ntb,raw). `python rescale.py example_specs/DEMO998_input_spec.ini thumbnail -f 0.03125`
 
 ```bash
 ├── CSHL_data_processed
@@ -112,7 +112,7 @@ Make sure the folder content looks like:
 │           └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_thumbnail_Ntb.tif
 ```
 
-- **Global intensity normalization**. Modify `input_spec.ini` as (None,Ntb,thumbnail). `python normalize_intensity.py input_spec.ini NtbNormalized`
+- **Global intensity normalization**. Modify `input_spec.ini` as (None,Ntb,thumbnail). `python normalize_intensity.py example_specs/DEMO998_input_spec.ini NtbNormalized`
 
 ```bash
 ├── CSHL_data_processed
@@ -125,7 +125,7 @@ Make sure the folder content looks like:
 
 - Create `CSHL_data_processed/DEMO998/DEMO998_sorted_filenames.txt`. If this file is already downloaded, skip.
 
-- **Align images in this stack**. Copy operation config template `cp operation_configs/from_none_to_aligned_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_none_to_aligned.ini`. Modify `from_none_to_aligned.ini`. In particular make sure `elastix_parameter_fp` is valid. Modify `input_spec.ini` as (None,NtbNormalized,thumbnail). `python align_compose.py input_spec.ini --op from_none_to_aligned`
+- **Align images in this stack**. Copy operation config template `cp operation_configs/from_none_to_aligned_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_none_to_aligned.ini`. Modify `from_none_to_aligned.ini`. In particular make sure `elastix_parameter_fp` is valid. Modify `input_spec.ini` as (None,NtbNormalized,thumbnail). `python align_compose.py example_specs/DEMO998_input_spec.ini --op from_none_to_aligned`
 
 ```bash
 ├── CSHL_data_processed
@@ -154,7 +154,7 @@ Make sure the folder content looks like:
 │       │       └── TransformParameters.0.txt
 ```
 
-- **Transform images**. `python warp_crop.py --input_spec input_spec.ini --op_id from_none_to_padded --njobs 8`
+- **Transform images**. `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_none_to_padded --njobs 8`
 
 ```bash
 ├── CSHL_data_processed
@@ -176,7 +176,7 @@ Make sure the folder content looks like:
 │       ├── DEMO998_prep1_thumbnail_initSnakeContours.pkl
 ```
 
-- Modify `input_spec.ini` as (alignedPadded,NtbNormalized,thumbnail). `python masking.py input_spec.ini /home/yuncong/demo_data/CSHL_data_processed/DEMO998/DEMO998_prep1_thumbnail_initSnakeContours.pkl`
+- Modify `input_spec.ini` as (alignedPadded,NtbNormalized,thumbnail). `python masking.py example_specs/DEMO998_input_spec.ini /home/yuncong/demo_data/CSHL_data_processed/DEMO998/DEMO998_prep1_thumbnail_initSnakeContours.pkl`
 
 ```bash
 ├── CSHL_data_processed
@@ -204,7 +204,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep1_thumbnail_mask.png
 ```
 
-- Modify `input_spec.ini` as (None,NtbNormalized,thumbnail). Run `python generate_original_image_crop_csv.py input_spec.ini`. 
+- Modify `input_spec.ini` as (None,NtbNormalized,thumbnail). Run `python generate_original_image_crop_csv.py example_specs/DEMO998_input_spec.ini`. 
 
 ```bash
 ├── CSHL_data_processed
@@ -212,7 +212,7 @@ Make sure the folder content looks like:
 │       ├── DEMO998_original_image_crop.csv
 ```
 - Copy operation config template. `cp $DATA_ROOTDIR/operation_configs/crop_orig_template.ini $DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_operation_configs/crop_orig.ini`. Modify `crop_orig.ini`. 
-- Modify `input_spec.ini` as (alignedPadded,mask,thumbnail). Run `python warp_crop.py --input_spec input_spec.ini --op_id from_padded_to_none`.
+- Modify `input_spec.ini` as (alignedPadded,mask,thumbnail). Run `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_padded_to_none`.
 
 ```bash
 ├── CSHL_data_processed
@@ -255,7 +255,7 @@ Make sure the folder content looks like:
 │       │       └── DEMO998_MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_raw_stdMap.bp
 ```
 
-- **Whole-slice crop**.  Copy operation config template `cp $DATA_ROOTDIR/operation_configs/from_padded_to_wholeslice_template.ini $DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_wholeslice.ini`. Modify `from_padded_to_wholeslice.ini`. In this file specify the cropbox for the domain `alignedWithMargin` based on `alignedPadded` images. Modify `input_spec.ini` as (None,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec input_spec.ini --op_id from_none_to_wholeslice`
+- **Whole-slice crop**.  Copy operation config template `cp $DATA_ROOTDIR/operation_configs/from_padded_to_wholeslice_template.ini $DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_wholeslice.ini`. Modify `from_padded_to_wholeslice.ini`. In this file specify the cropbox for the domain `alignedWithMargin` based on `alignedPadded` images. Modify `input_spec.ini` as (None,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_none_to_wholeslice`
 
 ```bash
 ├── CSHL_data_processed
@@ -266,7 +266,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep5_raw_NtbNormalizedAdaptiveInvertedGamma.tif
 ```
 
-- Modify `input_spec.ini` as (alignedWithMargin,NtbNormalizedAdaptiveInvertedGamma,raw). `python rescale.py input_spec.ini thumbnail -f 0.03125`
+- Modify `input_spec.ini` as (alignedWithMargin,NtbNormalizedAdaptiveInvertedGamma,raw). `python rescale.py example_specs/DEMO998_input_spec.ini thumbnail -f 0.03125`
 
 ```bash
 ├── CSHL_data_processed
@@ -277,7 +277,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep5_thumbnail_NtbNormalizedAdaptiveInvertedGamma.tif
 ```
 
-- **Brainstem crop**. Copy operation config template `cp operation_configs/from_padded_to_brainstem_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_brainstem.ini`. Modify `from_padded_to_brainstem.ini`. Modify `input_spec.ini` as (alignedWithMargin,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec input_spec.ini --op_id from_wholeslice_to_brainstem`
+- **Brainstem crop**. Copy operation config template `cp operation_configs/from_padded_to_brainstem_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_brainstem.ini`. Modify `from_padded_to_brainstem.ini`. Modify `input_spec.ini` as (alignedWithMargin,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_wholeslice_to_brainstem`
 
 ```bash
 ├── CSHL_data_processed
@@ -288,7 +288,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep2_raw_NtbNormalizedAdaptiveInvertedGamma.tif
 ```
 
-- Modify `input_spec.ini` as (alignedBrainstemCrop,NtbNormalizedAdaptiveInvertedGamma,raw). `python rescale.py input_spec.ini thumbnail -f 0.03125`
+- Modify `input_spec.ini` as (alignedBrainstemCrop,NtbNormalizedAdaptiveInvertedGamma,raw). `python rescale.py example_specs/DEMO998_input_spec.ini thumbnail -f 0.03125`
 
 ```bash
 ├── CSHL_data_processed
@@ -299,7 +299,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep2_thumbnail_NtbNormalizedAdaptiveInvertedGamma.tif
 ```
 
-- **Compress JPEG**. Use the same `input_spec.ini` as previous step. `python compress_jpeg.py input_spec.ini`
+- **Compress JPEG**. Use the same `input_spec.ini` as previous step. `python compress_jpeg.py example_specs/DEMO998_input_spec.ini`
 
 ```bash
 ├── CSHL_data_processed
@@ -451,8 +451,8 @@ z_midline=6
 │       │       ├── DEMO998_detector799_10.0um_scoreVolume_4N_R.bp
 │       │       └── DEMO998_detector799_10.0um_scoreVolume_4N_R_origin_wrt_wholebrain.txt
 ```
-- **Register 12N (hypoglossal nucleus)**. Run `python register_brains.py demo_fixed_brain_spec_12N.json demo_moving_brain_spec_12N.json -g`.
-- **Register 3N(oculomotor nucleus)/4N(trochlear nucleus) complex**. Run `python register_brains.py demo_fixed_brain_spec_3N_R_4N_R.json demo_moving_brain_spec_3N_R_4N_R.json -g`
+- **Register 12N (hypoglossal nucleus)**. Run `python register_brains.py example_specs/demo_fixed_brain_spec_12N.json example_specs/demo_moving_brain_spec_12N.json -g`.
+- **Register 3N(oculomotor nucleus)/4N(trochlear nucleus) complex**. Run `python register_brains.py example_specs/demo_fixed_brain_spec_3N_R_4N_R.json example_specs/demo_moving_brain_spec_3N_R_4N_R.json -g`
 
 ```bash
 ├── CSHL_registration_parameters
@@ -501,7 +501,7 @@ z_midline=6
 │   │           └── atlasV7_10.0um_scoreVolume_warp0_DEMO998_detector799_10.0um_scoreVolume_10.0um_4N_R_surround_200um_origin_wrt_fixedWholebrain.txt
 ```
 
-- **Visualize registration**. Run `python visualize_registration.py NtbNormalizedAdaptiveInvertedGamma demo_visualization_per_structure_alignment_spec.json -g demo_visualization_global_alignment_spec.json`
+- **Visualize registration**. Run `python visualize_registration.py NtbNormalizedAdaptiveInvertedGamma example_specs/demo_visualization_per_structure_alignment_spec.json -g example_specs/demo_visualization_global_alignment_spec.json`
 
 ```bash
 ├── CSHL_registration_visualization
