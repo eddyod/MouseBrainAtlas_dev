@@ -43,11 +43,11 @@ A configuration script is provided to create a [virtualenv](https://virtualenv.p
 - `cd demo`.
 
 
-## Preprocess
+## Procedures
 
 Note that the `input_spec.ini` files for most steps are different and must be manually created according to the actual input. In the following instructions, "create `input_spec.ini` as (prep_id, version, resolution)" means using the same set of image names as `image_name_list` but set the `prep_id`, `version` and `resolution` accordingly.
 
-- Run `python download_demo_data.py` to download necessary data. 
+- **Download demo data**. Run `python download_demo_data.py` to download necessary data. 
 ```bash
 MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242 225
 MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250 230
@@ -172,61 +172,7 @@ Make sure the folder content looks like:
 
 - Modify `all_stacks` in `src/utilities/metadata.py` to include `DEMO998`.
 
-- On a machine with monitor, launch the maskingGUI. Run `DATA_ROOTDIR=/home/yuncong/brainstem/home/yuncong/demo_data ROOT_DIR=/home/yuncong/brainstem/home/yuncong/demo_data THUMBNAIL_DATA_ROOTDIR=/home/yuncong/brainstem/home/yuncong/demo_data python src/gui/mask_editing_tool_v4.py DEMO998 NtbNormalized`. Generate initial masks.
-
-```bash
-├── CSHL_data_processed
-│   └── DEMO998
-│       ├── DEMO998_prep1_thumbnail_anchorInitSnakeContours.pkl
-│       ├── DEMO998_prep1_thumbnail_initSnakeContours.pkl
-```
-
-- Modify `input_spec.ini` as (alignedPadded,NtbNormalized,thumbnail). `python masking.py example_specs/DEMO998_input_spec.ini /home/yuncong/demo_data/CSHL_data_processed/DEMO998/DEMO998_prep1_thumbnail_initSnakeContours.pkl`
-
-```bash
-├── CSHL_data_processed
-│   └── DEMO998
-│       ├── DEMO998_prep1_thumbnail_autoSubmasks
-│       │   ├── MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242
-│       │   │   ├── MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242_prep1_thumbnail_autoSubmask_0.png
-│       │   │   └── MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242_prep1_thumbnail_autoSubmaskDecisions.csv
-│       │   ├── MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250
-│       │   │   ├── MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250_prep1_thumbnail_autoSubmask_0.png
-│       │   │   └── MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250_prep1_thumbnail_autoSubmaskDecisions.csv
-│       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257
-│       │       ├── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep1_thumbnail_autoSubmask_0.png
-│       │       └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep1_thumbnail_autoSubmaskDecisions.csv
-```
-
-- Re-launch masking GUI to inspect, correct the automatically generated masks, then export as PNGs.
-
-```bash
-├── CSHL_data_processed
-│   └── DEMO998
-│       ├── DEMO998_prep1_thumbnail_mask
-│       │   ├── MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242_prep1_thumbnail_mask.png
-│       │   ├── MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250_prep1_thumbnail_mask.png
-│       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep1_thumbnail_mask.png
-```
-
-- Modify `input_spec.ini` as (None,NtbNormalized,thumbnail). Run `python generate_original_image_crop_csv.py example_specs/DEMO998_input_spec.ini`. 
-
-```bash
-├── CSHL_data_processed
-│   └── DEMO998
-│       ├── DEMO998_original_image_crop.csv
-```
-- Copy operation config template. `cp $DATA_ROOTDIR/operation_configs/crop_orig_template.ini $DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_operation_configs/crop_orig.ini`. Modify `crop_orig.ini`. 
-- Modify `input_spec.ini` as (alignedPadded,mask,thumbnail). Run `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_padded_to_none`.
-
-```bash
-├── CSHL_data_processed
-│   └── DEMO998
-│       ├── DEMO998_thumbnail_mask
-│       │   ├── MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242_thumbnail_mask.png
-│       │   ├── MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250_thumbnail_mask.png
-│       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_thumbnail_mask.png
-```
+- **Generate masks**. Already provided. For how to generate them from scratch. refer to [mask_generation](mask_generation)
 
 - **Local adaptive intensity normalization**. Modify `input_spec.ini` as (None,Ntb,raw). `python normalize_intensity_adaptive.py input_spec.ini NtbNormalizedAdaptiveInvertedGamma`
 
