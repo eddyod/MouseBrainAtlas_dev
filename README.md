@@ -43,7 +43,7 @@ A configuration script is provided to create a [virtualenv](https://virtualenv.p
 - `cd demo`.
 
 
-## Procedures
+## Preprocessing
 
 Note that the `input_spec.ini` files for most steps are different and must be manually created according to the actual input. In the following instructions, "create `input_spec.ini` as (prep_id, version, resolution)" means using the same set of image names as `image_name_list` but set the `prep_id`, `version` and `resolution` accordingly.
 
@@ -269,15 +269,7 @@ left_section_limit = 225
 right_section_limit = 235
 ```
 
-- **Create intensity volume**. Run `./construct_intensity_volume.py DEMO998 --tb_version NtbNormalizedAdaptiveInvertedGamma --tb_resol thumbnail`
-
-```bash
-├── CSHL_volumes
-│   └── DEMO998
-│       └── DEMO998_wholebrainWithMargin_10.0um_intensityVolume
-│           ├── DEMO998_wholebrainWithMargin_10.0um_intensityVolume.bp
-│           └── DEMO998_wholebrainWithMargin_10.0um_intensityVolume_origin_wrt_wholebrain.txt
-```
+## Registration
 
 - **Download atlas**. Run `python download_atlas.py`.
 
