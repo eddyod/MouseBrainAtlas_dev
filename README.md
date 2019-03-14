@@ -172,7 +172,7 @@ Make sure the folder content looks like:
 
 - Modify `all_stacks` in `src/utilities/metadata.py` to include `DEMO998`.
 
-- **Generate masks**. Already provided. For how to generate them from scratch. refer to [mask_generation](mask_generation)
+- **Generate masks**. Already provided. For how to generate them from scratch. refer to [this page](doc/mask_generation.md).
 
 - **Local adaptive intensity normalization**. Modify `input_spec.ini` as (None,Ntb,raw). `python normalize_intensity_adaptive.py input_spec.ini NtbNormalizedAdaptiveInvertedGamma`
 
@@ -299,6 +299,8 @@ right_section_limit = 235
 │   │           ├── atlasV7_10.0um_scoreVolume_4N_R_surround_200um.bp
 │   │           └── atlasV7_10.0um_scoreVolume_4N_R_surround_200um_origin_wrt_canonicalAtlasSpace.txt
 ```
+
+- Use the provided rough global transform, or obtain it from scratch following the instructions on [this page](doc/rough_global_registration.md).
 
 - **Download pre-trained classifiers**. Run `python download_pretrained_classifiers.py -s "[\"12N\", \"3N\", \"4N\"]"`.
 
