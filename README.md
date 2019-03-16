@@ -128,7 +128,7 @@ Make sure the folder content looks like:
 │           └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_thumbnail_NtbNormalized.tif
 ```
 
-- **Create an ordered list of images**. Create `CSHL_data_processed/DEMO998/DEMO998_sorted_filenames.txt`. This file should already be included in the initial download.
+- **Create an ordered list of images**. Create `$DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_sorted_filenames.txt`. This file should already be included in the initial download.
 
 - **Align images in this stack**. 
     - Copy operation config template `cp operation_configs/from_none_to_aligned_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_none_to_aligned.ini`. Modify `from_none_to_aligned.ini`. In particular make sure `elastix_parameter_fp` is valid. 
@@ -258,7 +258,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep2_raw_NtbNormalizedAdaptiveInvertedGamma.tif
 ```
 
-- Modify `DEMO998_input_spec.ini` as (alignedBrainstemCrop, NtbNormalizedAdaptiveInvertedGamma, raw). `python rescale.py example_specs/DEMO998_input_spec.ini thumbnail -f 0.03125`
+- **Generate thumbnails**. Modify `DEMO998_input_spec.ini` as (alignedBrainstemCrop, NtbNormalizedAdaptiveInvertedGamma, raw). `python rescale.py example_specs/DEMO998_input_spec.ini thumbnail -f 0.03125`
 
 ```bash
 ├── CSHL_data_processed
@@ -280,7 +280,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep2_raw_NtbNormalizedAdaptiveInvertedGammaJpeg.jpg
 ```
  
-- Create `$DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_prep2_sectionLimit.ini`. This file should be included in the initial download.
+- **Identify section limits that only contain the brainstem**. Create `$DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_prep2_sectionLimit.ini`. This file should already be included in the initial download.
 
 ```bash
 [DEFAULT]
