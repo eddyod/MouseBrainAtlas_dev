@@ -5,7 +5,7 @@ _Nature Methods_ (2019/3/11)
 
 This toolkit is written in Python 2.7.2 and has been tested on a machine with Intel Xeon W5580 3.20GHz 16-core CPU, 128GB RAM and a Nvidia Titan X GPU, running Linux Ubuntu 16.04. 
 
-A complete run-through of the following demo takes roughly 2 hours. In order for the users to walk through the pipeline in as little time as possible, this demo only used 3 sections. Such small number of sections is not adequate to obtain an accurate registration. To get reasonable results, at least 10 sections are recommended for each landmark.
+A complete run-through of the following demo takes roughly 2 hours. In order to allow an user to walk through the pipeline in as little time as possible, this demo only used 3 sections. Such small number of sections is not adequate to obtain an accurate registration. To get reasonable results, at least 10 sections are recommended for each landmark.
 
 ## Installation
 
