@@ -34,8 +34,6 @@ def download_to_demo(fp):
 
 
 # Download raw JPEG2000 images
-
-print("Download raw JPEG2000 images")
 for img_name in [
 'MD662&661-F68-2017.06.06-07.39.27_MD661_2_0203',
 'MD662&661-F73-2017.06.06-09.53.20_MD661_1_0217',
@@ -51,8 +49,6 @@ for img_name in [
 
 # Download mxnet model
 
-print("Download mxnet model")
-
 model_dir_name = 'inception-bn-blue'
 
 fp = os.path.join(MXNET_MODEL_ROOTDIR, model_dir_name, 'inception-bn-blue-0000.params')
@@ -65,9 +61,6 @@ fp = os.path.join(MXNET_MODEL_ROOTDIR, model_dir_name, 'mean_224.npy')
 download_to_demo(relative_to_local(fp, local_root=DATA_ROOTDIR))
 
 # Download warp/crop operation configs.
-
-print("Download warp/crop operation configs")
-
 for fn in [
 'crop_orig_template',
 'from_aligned_to_none',
@@ -89,7 +82,9 @@ download_to_demo(os.path.join('brains_info', 'DEMO998.ini'))
 download_to_demo(os.path.join('CSHL_data_processed', 'DEMO998', 'DEMO998_sorted_filenames.txt'))
 download_to_demo(os.path.join('CSHL_data_processed', 'DEMO998', 'DEMO998_prep2_sectionLimits.ini'))
 
+# Elastix intra-stack registration parameters
 download_to_demo('elastix_parameters', 'Parameters_Rigid_MutualInfo_noNumberOfSpatialSamples_4000Iters.txt')
 
+# Rough global transform
 download_to_demo(os.path.join('CSHL_simple_global_registration', 'DEMO998_registered_atlas_structures_wrt_wholebrainXYcropped_xysecTwoCorners.json'))
 download_to_demo(os.path.join('CSHL_simple_global_registration', 'DEMO998_T_atlas_wrt_canonicalAtlasSpace_subject_wrt_wholebrain_atlasResol.txt'))
