@@ -130,7 +130,9 @@ Make sure the folder content looks like:
 
 - Create `CSHL_data_processed/DEMO998/DEMO998_sorted_filenames.txt`. If this file is already downloaded, skip.
 
-- **Align images in this stack**. Copy operation config template `cp operation_configs/from_none_to_aligned_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_none_to_aligned.ini`. Modify `from_none_to_aligned.ini`. In particular make sure `elastix_parameter_fp` is valid. Modify `DEMO998_input_spec.ini` as (None,NtbNormalized,thumbnail). `python align_compose.py example_specs/DEMO998_input_spec.ini --op from_none_to_aligned`
+- **Align images in this stack**. 
+    - Copy operation config template `cp operation_configs/from_none_to_aligned_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_none_to_aligned.ini`. Modify `from_none_to_aligned.ini`. In particular make sure `elastix_parameter_fp` is valid. 
+    - Modify `DEMO998_input_spec.ini` as (None,NtbNormalized,thumbnail). `python align_compose.py example_specs/DEMO998_input_spec.ini --op from_none_to_aligned`
 
 ```bash
 ├── CSHL_data_processed
@@ -219,7 +221,9 @@ Make sure the folder content looks like:
 │       │       └── DEMO998_MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_raw_stdMap.bp
 ```
 
-- **Whole-slice crop**.  Copy operation config template `cp $DATA_ROOTDIR/operation_configs/from_padded_to_wholeslice_template.ini $DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_wholeslice.ini`. Modify `from_padded_to_wholeslice.ini`. In this file specify the cropbox for the domain `alignedWithMargin` based on `alignedPadded` images. Modify `DEMO998_input_spec.ini` as (None,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_none_to_wholeslice`
+- **Whole-slice crop**.  
+    - Copy operation config template `cp $DATA_ROOTDIR/operation_configs/from_padded_to_wholeslice_template.ini $DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_wholeslice.ini`. Modify `from_padded_to_wholeslice.ini`. In this file specify the cropbox for the domain `alignedWithMargin` based on `alignedPadded` images. 
+    - Modify `DEMO998_input_spec.ini` as (None,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_none_to_wholeslice`
 
 ```bash
 ├── CSHL_data_processed
@@ -241,7 +245,9 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep5_thumbnail_NtbNormalizedAdaptiveInvertedGamma.tif
 ```
 
-- **Brainstem crop**. Copy operation config template `cp operation_configs/from_padded_to_brainstem_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_brainstem.ini`. Modify `from_padded_to_brainstem.ini`. Modify `DEMO998_input_spec.ini` as (alignedWithMargin,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_wholeslice_to_brainstem`
+- **Brainstem crop**. 
+    - Copy operation config template `cp operation_configs/from_padded_to_brainstem_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_brainstem.ini`. Modify `from_padded_to_brainstem.ini`.
+    - Modify `DEMO998_input_spec.ini` as (alignedWithMargin,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_wholeslice_to_brainstem`
 
 ```bash
 ├── CSHL_data_processed
