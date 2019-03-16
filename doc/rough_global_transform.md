@@ -1,4 +1,14 @@
-Between "Create the intensity volume" and "Download atlas"
+Between "Create section limits" and "Download atlas"
+
+- **Create intensity volume**. Run `./construct_intensity_volume.py DEMO998 --tb_version NtbNormalizedAdaptiveInvertedGamma --tb_resol thumbnail`
+
+```bash
+├── CSHL_volumes
+│   └── DEMO998
+│       └── DEMO998_wholebrainWithMargin_10.0um_intensityVolume
+│           ├── DEMO998_wholebrainWithMargin_10.0um_intensityVolume.bp
+│           └── DEMO998_wholebrainWithMargin_10.0um_intensityVolume_origin_wrt_wholebrain.txt
+```
 
 - **Manual rough global registration**. Run `DATA_ROOTDIR=/home/yuncong/brainstem/home/yuncong/demo_data ROOT_DIR=/home/yuncong/brainstem/home/yuncong/demo_data THUMBNAIL_DATA_ROOTDIR=/home/yuncong/brainstem/home/yuncong/demo_data python src/gui/brain_labeling_gui_v28.py DEMO998 --img_version NtbNormalizedAdaptiveInvertedGammaJpeg`. Note down x and y coordinates of the center of 12N and of 3N. Also note down the z-coordinate of the midline. Coordinates show up when clicking on the high resolution panel while holding the space bar.
 

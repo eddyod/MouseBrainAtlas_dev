@@ -43,7 +43,7 @@ A configuration script is provided to create a [virtualenv](https://virtualenv.p
 - `cd demo`.
 
 
-## Procedures
+## Preprocessing
 
 Note that the `input_spec.ini` files for most steps are different and must be manually created according to the actual input. In the following instructions, "create `input_spec.ini` as (prep_id, version, resolution)" means using the same set of image names as `image_name_list` but set the `prep_id`, `version` and `resolution` accordingly.
 
@@ -172,7 +172,7 @@ Make sure the folder content looks like:
 
 - Modify `all_stacks` in `src/utilities/metadata.py` to include `DEMO998`.
 
-- **Generate masks**. Already provided. For how to generate them from scratch. refer to [mask_generation](mask_generation)
+- **Generate masks**. Already provided. For how to generate them from scratch. refer to [this page](doc/mask_generation.md).
 
 - **Local adaptive intensity normalization**. Modify `input_spec.ini` as (None,Ntb,raw). `python normalize_intensity_adaptive.py input_spec.ini NtbNormalizedAdaptiveInvertedGamma`
 
@@ -269,15 +269,7 @@ left_section_limit = 225
 right_section_limit = 235
 ```
 
-- Create the intensity volume by running `./construct_intensity_volume.py DEMO998 --tb_version NtbNormalizedAdaptiveInvertedGamma --tb_resol thumbnail`
-
-```bash
-├── CSHL_volumes
-│   └── DEMO998
-│       └── DEMO998_wholebrainWithMargin_10.0um_intensityVolume
-│           ├── DEMO998_wholebrainWithMargin_10.0um_intensityVolume.bp
-│           └── DEMO998_wholebrainWithMargin_10.0um_intensityVolume_origin_wrt_wholebrain.txt
-```
+## Registration
 
 - **Download atlas**. Run `python download_atlas.py`.
 
@@ -299,6 +291,8 @@ right_section_limit = 235
 │   │           ├── atlasV7_10.0um_scoreVolume_4N_R_surround_200um.bp
 │   │           └── atlasV7_10.0um_scoreVolume_4N_R_surround_200um_origin_wrt_canonicalAtlasSpace.txt
 ```
+
+- Use the provided **rough global transform**, or obtain it from scratch following the instructions on [this page](doc/rough_global_registration.md).
 
 - **Download pre-trained classifiers**. Run `python download_pretrained_classifiers.py -s "[\"12N\", \"3N\", \"4N\"]"`.
 
