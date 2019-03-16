@@ -174,6 +174,19 @@ Make sure the folder content looks like:
 
 - **Generate masks**. The masks should be included in the initial download. For how to generate them from scratch. refer to [this page](doc/mask_generation.md).
 
+```bash
+├── CSHL_data_processed
+│   └── DEMO998
+│       ├── DEMO998_prep1_thumbnail_mask
+│       │   ├── MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242_prep1_thumbnail_mask.png
+│       │   ├── MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250_prep1_thumbnail_mask.png
+│       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep1_thumbnail_mask.png
+│       ├── DEMO998_thumbnail_mask
+│       │   ├── MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242_thumbnail_mask.png
+│       │   ├── MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250_thumbnail_mask.png
+│       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_thumbnail_mask.png
+```
+
 - **Local adaptive intensity normalization**. Modify `DEMO998_input_spec.ini` as (None,Ntb,raw). `python normalize_intensity_adaptive.py input_spec.ini NtbNormalizedAdaptiveInvertedGamma`
 
 ```bash
