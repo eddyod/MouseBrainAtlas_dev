@@ -48,11 +48,7 @@ A configuration script is provided to create a [virtualenv](https://virtualenv.p
 Note that the `DEMO998_input_spec.ini` files for most steps are different and must be manually created according to the actual input. In the following instructions, "create `DEMO998_input_spec.ini` as (prep_id, version, resolution)" means using the same set of image names as `image_name_list` but set the `prep_id`, `version` and `resolution` accordingly.
 
 - **Download demo data**. Run `python download_demo_data.py` to download necessary data. 
-```bash
-MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242 225
-MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250 230
-MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257 235
-```
+
 Make sure the folder content looks like:
 
 ```bash
@@ -129,6 +125,12 @@ Make sure the folder content looks like:
 ```
 
 - **Create an ordered list of images**. Create `$DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_sorted_filenames.txt`. This file should already be included in the initial download.
+
+```bash
+MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242 225
+MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250 230
+MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257 235
+```
 
 - **Align images in this stack**. 
     - Copy operation config template `cp operation_configs/from_none_to_aligned_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_none_to_aligned.ini`. Modify `from_none_to_aligned.ini`. In particular make sure `elastix_parameter_fp` is valid. 
