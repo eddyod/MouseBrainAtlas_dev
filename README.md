@@ -124,7 +124,7 @@ Make sure the folder content looks like:
 │           └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_thumbnail_NtbNormalized.tif
 ```
 
-- **Create an ordered list of images**. Create `$DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_sorted_filenames.txt`. This file should already be included in the initial download.
+- **Create an ordered list of images**. Create `$DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_sorted_filenames.txt`. This file should already be included in the initial download. Each row of the file contains an image name and its index. The file should look like:
 
 ```bash
 MD662&661-F81-2017.06.06-12.44.40_MD661_2_0242 225
@@ -282,7 +282,7 @@ MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257 235
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep2_raw_NtbNormalizedAdaptiveInvertedGammaJpeg.jpg
 ```
  
-- **Identify section limits that only contain the brainstem**. Create `$DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_prep2_sectionLimit.ini`. This file should already be included in the initial download.
+- **Identify section limits that only contain the brainstem**. Create `$DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_prep2_sectionLimit.ini`. This file should already be included in the initial download. The content looks like:
 
 ```bash
 [DEFAULT]
@@ -313,7 +313,13 @@ right_section_limit = 235
 │   │           └── atlasV7_10.0um_scoreVolume_4N_R_surround_200um_origin_wrt_canonicalAtlasSpace.txt
 ```
 
-- Compute **rough global transform**. The relevant files should be included in the initial download. For details on how to obtain it from scratch, follow the instructions on [this page](doc/rough_global_registration.md).
+- Compute **rough global transform**. The relevant results should already be included in the initial download. For details on how to obtain it from scratch, follow the instructions on [this page](doc/rough_global_registration.md).
+
+```bash
+├── CSHL_simple_global_registration
+│   ├── DEMO998_registered_atlas_structures_wrt_wholebrainXYcropped_xysecTwoCorners.json
+│   └── DEMO998_T_atlas_wrt_canonicalAtlasSpace_subject_wrt_wholebrain_atlasResol.txt
+```
 
 - **Download pre-trained classifiers**. Run `python download_pretrained_classifiers.py -s "[\"12N\", \"3N\", \"4N\"]"`.
 
