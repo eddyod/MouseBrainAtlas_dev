@@ -3,7 +3,7 @@ Yuncong Chen, Lauren E. McElvain, Alexander S. Tolpygo, Daniel Ferrante, Beth Fr
 _Nature Methods_ (2019/3/11)
 
 
-This toolkit is written in Python 2.7.2 and has been tested on a machine with Intel Xeon W5580 3.20GHz 16-core CPU, 128GB RAM and a Nvidia Titan X GPU, running Linux Ubuntu 16.04. 
+This toolkit is written in Python 2.7.2 and has been tested on a machine with Intel Xeon W5580 3.20GHz 16-core CPU, 128GB RAM and a Nvidia Titan X GPU, running Linux Ubuntu 16.04. A complete run-through of the following demo takes roughly 2-3 hours.
 
 ## Installation
 
@@ -172,7 +172,7 @@ Make sure the folder content looks like:
 
 - Modify `all_stacks` in `src/utilities/metadata.py` to include `DEMO998`.
 
-- **Generate masks**. Already provided. For how to generate them from scratch. refer to [this page](doc/mask_generation.md).
+- **Generate masks**. The masks should be included in the initial download. For how to generate them from scratch. refer to [this page](doc/mask_generation.md).
 
 - **Local adaptive intensity normalization**. Modify `input_spec.ini` as (None,Ntb,raw). `python normalize_intensity_adaptive.py input_spec.ini NtbNormalizedAdaptiveInvertedGamma`
 
@@ -239,7 +239,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep2_raw_NtbNormalizedAdaptiveInvertedGamma.tif
 ```
 
-- Modify `input_spec.ini` as (alignedBrainstemCrop,NtbNormalizedAdaptiveInvertedGamma,raw). `python rescale.py example_specs/DEMO998_input_spec.ini thumbnail -f 0.03125`
+- Modify `input_spec.ini` as (alignedBrainstemCrop, NtbNormalizedAdaptiveInvertedGamma, raw). `python rescale.py example_specs/DEMO998_input_spec.ini thumbnail -f 0.03125`
 
 ```bash
 ├── CSHL_data_processed
@@ -261,7 +261,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep2_raw_NtbNormalizedAdaptiveInvertedGammaJpeg.jpg
 ```
  
-- Create `DEMO998_prep2_sectionLimit.ini` if not already downloaded.
+- Create `DEMO998_prep2_sectionLimit.ini`. This file should be included in the initial download.
 
 ```bash
 [DEFAULT]
@@ -292,7 +292,7 @@ right_section_limit = 235
 │   │           └── atlasV7_10.0um_scoreVolume_4N_R_surround_200um_origin_wrt_canonicalAtlasSpace.txt
 ```
 
-- Use the provided **rough global transform**, or obtain it from scratch following the instructions on [this page](doc/rough_global_registration.md).
+- Compute **rough global transform**. The relevant files should be included in the initial download. For details on how to obtain it from scratch, follow the instructions on [this page](doc/rough_global_registration.md).
 
 - **Download pre-trained classifiers**. Run `python download_pretrained_classifiers.py -s "[\"12N\", \"3N\", \"4N\"]"`.
 
