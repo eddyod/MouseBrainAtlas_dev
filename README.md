@@ -465,6 +465,6 @@ right_section_limit = 235
 │           └── DEMO998_NtbNormalizedAdaptiveInvertedGammaJpeg_235.jpg
 ```
 
-An example registration visualization is given below (white = rough global registration, colored = different probability contours of locally registered structures)
+An example registration visualization is given below (white contours = rough global registration, colored = different probability contours of locally registered structures)
 ![example registration_visualization](doc/example_registration_visualization.jpg?raw=true "Title")
 
