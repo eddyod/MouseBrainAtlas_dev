@@ -45,7 +45,7 @@ A configuration script is provided to create a [virtualenv](https://virtualenv.p
 
 ## Preprocessing
 
-Note that the `input_spec.ini` files for most steps are different and must be manually created according to the actual input. In the following instructions, "create `input_spec.ini` as (prep_id, version, resolution)" means using the same set of image names as `image_name_list` but set the `prep_id`, `version` and `resolution` accordingly.
+Note that the `DEMO998_input_spec.ini` files for most steps are different and must be manually created according to the actual input. In the following instructions, "create `DEMO998_input_spec.ini` as (prep_id, version, resolution)" means using the same set of image names as `image_name_list` but set the `prep_id`, `version` and `resolution` accordingly.
 
 - **Download demo data**. Run `python download_demo_data.py` to download necessary data. 
 ```bash
@@ -96,7 +96,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_raw.tif
 ```
 
-- **Extract Neurotrace-blue channel**. Modify `input_spec.ini` as (None,None,raw). `python extract_channel.py example_specs/DEMO998_input_spec.ini 2 Ntb`
+- **Extract Neurotrace-blue channel**. Modify `DEMO998_input_spec.ini` as (None,None,raw). `python extract_channel.py example_specs/DEMO998_input_spec.ini 2 Ntb`
 
 ```bash
 ├── CSHL_data_processed
@@ -106,7 +106,7 @@ Make sure the folder content looks like:
 │           ├── MD662&661-F84-2017.06.06-14.03.51_MD661_1_0250_raw_Ntb.tif
 │           └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_raw_Ntb.tif
 ```
-- **Rescale to thumbnail**. Modify `input_spec.ini` as (None,Ntb,raw). `python rescale.py example_specs/DEMO998_input_spec.ini thumbnail -f 0.03125`
+- **Rescale to thumbnail**. Modify `DEMO998_input_spec.ini` as (None,Ntb,raw). `python rescale.py example_specs/DEMO998_input_spec.ini thumbnail -f 0.03125`
 
 ```bash
 ├── CSHL_data_processed
@@ -117,7 +117,7 @@ Make sure the folder content looks like:
 │           └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_thumbnail_Ntb.tif
 ```
 
-- **Global intensity normalization**. Modify `input_spec.ini` as (None,Ntb,thumbnail). `python normalize_intensity.py example_specs/DEMO998_input_spec.ini NtbNormalized`
+- **Global intensity normalization**. Modify `DEMO998_input_spec.ini` as (None,Ntb,thumbnail). `python normalize_intensity.py example_specs/DEMO998_input_spec.ini NtbNormalized`
 
 ```bash
 ├── CSHL_data_processed
@@ -130,7 +130,7 @@ Make sure the folder content looks like:
 
 - Create `CSHL_data_processed/DEMO998/DEMO998_sorted_filenames.txt`. If this file is already downloaded, skip.
 
-- **Align images in this stack**. Copy operation config template `cp operation_configs/from_none_to_aligned_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_none_to_aligned.ini`. Modify `from_none_to_aligned.ini`. In particular make sure `elastix_parameter_fp` is valid. Modify `input_spec.ini` as (None,NtbNormalized,thumbnail). `python align_compose.py example_specs/DEMO998_input_spec.ini --op from_none_to_aligned`
+- **Align images in this stack**. Copy operation config template `cp operation_configs/from_none_to_aligned_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_none_to_aligned.ini`. Modify `from_none_to_aligned.ini`. In particular make sure `elastix_parameter_fp` is valid. Modify `DEMO998_input_spec.ini` as (None,NtbNormalized,thumbnail). `python align_compose.py example_specs/DEMO998_input_spec.ini --op from_none_to_aligned`
 
 ```bash
 ├── CSHL_data_processed
@@ -170,11 +170,11 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep1_thumbnail_NtbNormalized.tif
 ```
 
-- Modify `all_stacks` in `src/utilities/metadata.py` to include `DEMO998`.
+- Make sure the `all_stacks` meta-variable in `src/utilities/metadata.py` includes `DEMO998`.
 
 - **Generate masks**. The masks should be included in the initial download. For how to generate them from scratch. refer to [this page](doc/mask_generation.md).
 
-- **Local adaptive intensity normalization**. Modify `input_spec.ini` as (None,Ntb,raw). `python normalize_intensity_adaptive.py input_spec.ini NtbNormalizedAdaptiveInvertedGamma`
+- **Local adaptive intensity normalization**. Modify `DEMO998_input_spec.ini` as (None,Ntb,raw). `python normalize_intensity_adaptive.py input_spec.ini NtbNormalizedAdaptiveInvertedGamma`
 
 ```bash
 ├── CSHL_data_processed
@@ -206,7 +206,7 @@ Make sure the folder content looks like:
 │       │       └── DEMO998_MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_raw_stdMap.bp
 ```
 
-- **Whole-slice crop**.  Copy operation config template `cp $DATA_ROOTDIR/operation_configs/from_padded_to_wholeslice_template.ini $DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_wholeslice.ini`. Modify `from_padded_to_wholeslice.ini`. In this file specify the cropbox for the domain `alignedWithMargin` based on `alignedPadded` images. Modify `input_spec.ini` as (None,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_none_to_wholeslice`
+- **Whole-slice crop**.  Copy operation config template `cp $DATA_ROOTDIR/operation_configs/from_padded_to_wholeslice_template.ini $DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_wholeslice.ini`. Modify `from_padded_to_wholeslice.ini`. In this file specify the cropbox for the domain `alignedWithMargin` based on `alignedPadded` images. Modify `DEMO998_input_spec.ini` as (None,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_none_to_wholeslice`
 
 ```bash
 ├── CSHL_data_processed
@@ -228,7 +228,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep5_thumbnail_NtbNormalizedAdaptiveInvertedGamma.tif
 ```
 
-- **Brainstem crop**. Copy operation config template `cp operation_configs/from_padded_to_brainstem_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_brainstem.ini`. Modify `from_padded_to_brainstem.ini`. Modify `input_spec.ini` as (alignedWithMargin,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_wholeslice_to_brainstem`
+- **Brainstem crop**. Copy operation config template `cp operation_configs/from_padded_to_brainstem_template.ini CSHL_data_processed/DEMO998/DEMO998_operation_configs/from_padded_to_brainstem.ini`. Modify `from_padded_to_brainstem.ini`. Modify `DEMO998_input_spec.ini` as (alignedWithMargin,NtbNormalizedAdaptiveInvertedGamma,raw). `python warp_crop.py --input_spec example_specs/DEMO998_input_spec.ini --op_id from_wholeslice_to_brainstem`
 
 ```bash
 ├── CSHL_data_processed
@@ -239,7 +239,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep2_raw_NtbNormalizedAdaptiveInvertedGamma.tif
 ```
 
-- Modify `input_spec.ini` as (alignedBrainstemCrop, NtbNormalizedAdaptiveInvertedGamma, raw). `python rescale.py example_specs/DEMO998_input_spec.ini thumbnail -f 0.03125`
+- Modify `DEMO998_input_spec.ini` as (alignedBrainstemCrop, NtbNormalizedAdaptiveInvertedGamma, raw). `python rescale.py example_specs/DEMO998_input_spec.ini thumbnail -f 0.03125`
 
 ```bash
 ├── CSHL_data_processed
@@ -250,7 +250,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep2_thumbnail_NtbNormalizedAdaptiveInvertedGamma.tif
 ```
 
-- **Compress JPEG**. Use the same `input_spec.ini` as previous step. `python compress_jpeg.py example_specs/DEMO998_input_spec.ini`
+- **Compress JPEG**. Use the same `DEMO998_input_spec.ini` as previous step. `python compress_jpeg.py example_specs/DEMO998_input_spec.ini`
 
 ```bash
 ├── CSHL_data_processed
@@ -261,7 +261,7 @@ Make sure the folder content looks like:
 │       │   └── MD662&661-F86-2017.06.06-14.56.48_MD661_2_0257_prep2_raw_NtbNormalizedAdaptiveInvertedGammaJpeg.jpg
 ```
  
-- Create `DEMO998_prep2_sectionLimit.ini`. This file should be included in the initial download.
+- Create `$DATA_ROOTDIR/CSHL_data_processed/DEMO998/DEMO998_prep2_sectionLimit.ini`. This file should be included in the initial download.
 
 ```bash
 [DEFAULT]
